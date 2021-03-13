@@ -6,6 +6,12 @@
 
 4. create a webhook view 
 ``` 
+import subprocess
+
+import hmac
+import hashlib
+from django.conf import settings
+
 @method_decorator(csrf_exempt, name='dispatch')
 class GitHubDeployView(View):
     def post(self, request):
@@ -24,7 +30,7 @@ class GitHubDeployView(View):
             return False
         return True
 ```
-        
+- Setup git hub secret in `utils.py` in the same folder as `settings.py` and import the GH_SECRET from utils to settings.        
 5. Setup webhook with url on the github repo settings you want to ci-cd
 6. create a makefile 
 ```
